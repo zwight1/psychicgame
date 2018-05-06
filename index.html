@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Psychic Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+    
+    <div class="container">
+        <div class="row">
+
+             <div class="col-lg-3"><img src="https://i.pinimg.com/originals/72/a1/2f/72a12fccb530d17edf95f196e6b071cf.png" alt="Trelawney"></div>
+         
+            <div id="game"class="col-lg-6" style="margin-top: 75px">
+             <h1>Trelawney's Divination Class</h1>
+             <p>Guess the letter I am thinking!</p>
+             <p>Total Wins: </p>
+             <p>Total Losses: </p>
+             <p>Guesses Left: </p>
+             <p>Your Guesses so far: </p>
+            </div>
+         
+            <div class="col-lg-3"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPuCY2qlI47NnNuGSWaV1UpIxMEQ5aIaOjmc2x6B-12aXLpUnxHQ" alt="Crystal Ball" height="400px" width="300"></div>
+        </div>
+    </div>     
+    
+
+
+<script type="text/javascript">
+
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var guessesSoFar = []; 
+    var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']; //list of letters to choose from
+  
+  
+    document.onkeyup = function(event) {
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase(); 
+        var computerGuess = computerChoices[Math.floor(Math.random()*computerChoices.length)]; 
+        guessesSoFar.push(userGuess); 
+        if (userGuess == computerGuess) {
+            wins++;
+            alert("Winner Winner Chicken Dinner");
+            guessesLeft = 9; 
+            guessesSoFar.length = 0; 
+        }
+        else if (guessesLeft == 0){
+            losses++;
+            alert("Try Again");
+            guessesLeft = 9;
+            guessesSoFar.length = 0;
+        }
+        else if (userGuess !== computerGuess){
+            guessesLeft--; 
+        }  
+
+
+        var html = "<h1>Trelawney's Divination Class</h1>" + 
+        "<p>Guess the letter I am thinking!</p>" +
+        "<p>Total Wins: " +  wins +  "</p>" +
+        "<p>Total Losses: " +  losses +  "</p>" +
+        "<p>Guesses Left: " +  guessesLeft +  "</p>" +
+        "<p>Your Guesses so far: " + guessesSoFar + "</p>"
+        ;
+
+        document.querySelector('#game').innerHTML = html;
+    }
+</script>
+</body>
+</html>
